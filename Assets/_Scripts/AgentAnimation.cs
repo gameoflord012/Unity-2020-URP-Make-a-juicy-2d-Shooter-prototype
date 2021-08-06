@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AgentAnimation : MonoBehaviour
@@ -15,7 +13,7 @@ public class AgentAnimation : MonoBehaviour
     {
         agentAnimator.SetBool("Walk", val);
     }
-    
+
     public void AnimatePlayer(float velocity)
     {
         SetWalkAnimation(velocity > 0);
