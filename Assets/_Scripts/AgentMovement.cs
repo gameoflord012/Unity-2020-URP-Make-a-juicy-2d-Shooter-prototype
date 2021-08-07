@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AgentMovement : MonoBehaviour
 {
-    protected Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rigidbody2d;
 
     [field : SerializeField]
     public MovementDataSO MovementData { get; set; }
@@ -21,7 +21,7 @@ public class AgentMovement : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
     public void MoveAgent(Vector2 movementInput)
@@ -48,6 +48,6 @@ public class AgentMovement : MonoBehaviour
     private void FixedUpdate()
     {
         OnVelocityChange?.Invoke(currentVelocity);
-        rigidbody2D.velocity = currentVelocity * movementDirection.normalized;
+        rigidbody2d.velocity = currentVelocity * movementDirection.normalized;
     }
 }

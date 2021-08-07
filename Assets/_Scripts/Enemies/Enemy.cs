@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour, IHittable
+public class Enemy : MonoBehaviour, IHittable, IAgent
 {
     [field: SerializeField]
     public EnemyDataSO EnemyData { get; set; }
@@ -15,6 +15,21 @@ public class Enemy : MonoBehaviour, IHittable
     [field: SerializeField]
     public UnityEvent OnGetHit { get; set; }
 
+    [field: SerializeField]
+    public UnityEvent OnDie { get; set; }
+
+    private bool dead = false;
+
+    public EnemyAttack enemyAttack { get; set; }
+
+    private void Awake()
+    {
+        if(enemyAttack == null)
+        {
+            enemyAttack = GetComponent<EnemyAttack>();
+        }
+    }
+
     private void Start()
     {
         Health = EnemyData.MaxHealth;
@@ -22,11 +37,27 @@ public class Enemy : MonoBehaviour, IHittable
 
     public void GetHit(int damage, GameObject damageDealer)
     {
+        if (dead) return;
+
         Health--;
         OnGetHit?.Invoke();
-        if(Health <= 0)
+        if (Health <= 0)
         {
-            Destroy(gameObject);
+            dead = true;
+            OnDie?.Invoke();
+            StartCoroutine(WaitToDie());
         }
+    }
+
+    IEnumerator WaitToDie()
+    {
+        yield return new WaitForSeconds(.54f);
+        Destroy(gameObject);
+    }
+
+    public void PerformAttack()
+    {
+        if (dead) return;
+        enemyAttack.Attack(EnemyData.Damage);
     }
 }

@@ -6,5 +6,8 @@ using UnityEngine;
 public class EnemyDataSO : ScriptableObject
 {
     [field: SerializeField]
-    public int MaxHealth { get; set; }
+    public int MaxHealth { get; private set; } = 3;
+
+    [field: SerializeField]
+    public int Damage { get; set; } = 1;
 }

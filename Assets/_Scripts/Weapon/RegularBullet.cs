@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RegularBullet : Bullet
 {
-    protected Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rigidbody2d = null;
 
     public override BulletDataSO BulletData
     { 
@@ -13,16 +13,16 @@ public class RegularBullet : Bullet
         set
         {
             base.BulletData = value;
-            rigidbody2D = GetComponent<Rigidbody2D>();
-            rigidbody2D.drag = BulletData.Friction;
+            rigidbody2d = GetComponent<Rigidbody2D>();
+            rigidbody2d.drag = BulletData.Friction;
         }
     }
 
     private void FixedUpdate()
     {
-        if(rigidbody2D != null && BulletData != null)
+        if(rigidbody2d != null && BulletData != null)
         {
-            rigidbody2D.MovePosition(transform.position + BulletData.BulletSpeed * transform.right * Time.fixedDeltaTime);
+            rigidbody2d.MovePosition(transform.position + BulletData.BulletSpeed * transform.right * Time.fixedDeltaTime);
         }
     }
 
@@ -39,12 +39,13 @@ public class RegularBullet : Bullet
         {
             HitEnemy();
         }
+
         Destroy(gameObject);
     }
 
     private void HitEnemy()
     {
-        Debug.Log("Hitting Enemy");
+
     }
 
     private void HitObstacle()
