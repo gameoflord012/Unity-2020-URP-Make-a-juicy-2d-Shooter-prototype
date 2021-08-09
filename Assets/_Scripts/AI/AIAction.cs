@@ -9,9 +9,9 @@ public abstract class AIAction : MonoBehaviour
 
     private void Awake()
     {
-        aiActionData = transform.root.GetComponentInChildren<AIActionData>();
-        aiMovementData = transform.root.GetComponentInChildren<AIMovementData>();
-        enemyBrain = transform.root.GetComponent<EnemyAIBrain>();
+        aiActionData = transform.GetComponentInParent<AIActionData>();
+        aiMovementData = transform.GetComponentInParent<AIMovementData>();
+        enemyBrain = transform.GetComponentInParent<EnemyAIBrain>();
     }
 
     public abstract void TakeAction();

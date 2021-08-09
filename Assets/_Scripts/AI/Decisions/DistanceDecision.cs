@@ -10,7 +10,7 @@ public class DistanceDecision : AIDecision
 
     public override bool MakeADecision()
     {
-        if (Vector3.Distance(enemyBrain.Target.transform.position, transform.position) < Distance)
+        if (Vector2.Distance(enemyBrain.Target.transform.position, transform.position) < Distance)
         {
             if (aiActionData.TargetSpotted == false)
             {

@@ -13,7 +13,7 @@ public class AIState : MonoBehaviour
 
     private void Awake()
     {
-        enemyBrain = transform.root.GetComponent<EnemyAIBrain>();
+        enemyBrain = transform.GetComponentInParent<EnemyAIBrain>();
     }
 
     public void UpdateState()
